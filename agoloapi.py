@@ -2,7 +2,7 @@ from inspect import getmembers
 import requests
 
 api_key = ''
-summary_length = 5
+summary_length = 4
 
 def summarize(url):
   payload = {
