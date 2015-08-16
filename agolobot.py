@@ -22,7 +22,7 @@ def is_already_done(comment):
   return done
 
 while True:
-    subreddit = r.get_subreddit('test')
+    subreddit = r.get_subreddit('worldnews')
     for comment in subreddit.get_comments():
         text = comment.body.lower()
         has_word = any(string in text for string in searchWords)
