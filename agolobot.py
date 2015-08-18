@@ -10,6 +10,7 @@ r = praw.Reddit('Agolo Reddit bot')
 r.login(disable_warning=True);
 
 searchWords = ['!tldr', '!tl;dr']
+subreddits = ['worldnews', 'android']
 
 def is_already_done(comment):
   done = False
@@ -22,17 +23,21 @@ def is_already_done(comment):
   return done
 
 while True:
-    subreddit = r.get_subreddit('worldnews')
-    for comment in subreddit.get_comments():
-        text = comment.body.lower()
-        has_word = any(string in text for string in searchWords)
+    try:
+      for subreddit_name in subreddits:
+        subreddit = r.get_subreddit(subreddit_name)
+        for comment in subreddit.get_comments():
+            text = comment.body.lower()
+            has_word = any(string in text for string in searchWords)
 
-        if has_word and not is_already_done(comment):
-          print("replying to %s"%comment.id)
-          try:
-            comment_reply_text = agoloapi.summarize(comment.submission.url)
-            #print(comment_reply_text)
-            comment.reply(comment_reply_text)
-          except:
-            pass
-    time.sleep(10)
+            if has_word and not is_already_done(comment):
+              print("replying to %s"%comment.id)
+              try:
+                comment_reply_text = agoloapi.summarize(comment.submission.url)
+                #print(comment_reply_text)
+                comment.reply(comment_reply_text)
+              except:
+                pass
+    except:
+      pass
+    time.sleep(60)
