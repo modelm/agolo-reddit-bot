@@ -10,7 +10,7 @@ r = praw.Reddit('Agolo Reddit bot')
 r.login(disable_warning=True);
 
 searchWords = ['!tldr', '!tl;dr']
-subreddits = ['worldnews', 'android', 'finance']
+subreddits = ['worldnews', 'android', 'finance', 'nyc']
 
 def is_already_done(comment):
   done = False
